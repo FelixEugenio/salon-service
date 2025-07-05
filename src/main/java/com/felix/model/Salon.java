@@ -15,7 +15,9 @@ import java.util.List;
 public class Salon {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   @GeneratedValue(strategy = GenerationType.AUTO)
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "salon_seq")
+    //@SequenceGenerator(name = "salon_seq", sequenceName = "salon_seq", allocationSize = 1)
     private Long id;
 
     @Column(nullable = false)

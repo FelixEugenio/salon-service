@@ -6,6 +6,11 @@ import com.felix.payload.dto.SalonDTO;
 public class SalonMapper {
 
     public static SalonDTO mapToDTO(Salon salon){
+
+        if(salon == null){
+            return null;
+        }
+
         SalonDTO salonDTO = new SalonDTO();
         salonDTO.setId(salon.getId());
         salonDTO.setName(salon.getName());

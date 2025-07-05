@@ -28,8 +28,8 @@ public class SalonController {
         return ResponseEntity.ok(salonDTO1);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<SalonDTO> updateSalon(@PathVariable("id") Long salonId, @RequestBody @Valid SalonDTO salonDTO) throws Exception{
+    @PatchMapping("/{salonId}")
+    public ResponseEntity<SalonDTO> updateSalon(@PathVariable("salonId") Long salonId, @RequestBody @Valid SalonDTO salonDTO) throws Exception{
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1L);
         Salon salon = salonService.updateSalon(salonDTO,userDTO,salonId);

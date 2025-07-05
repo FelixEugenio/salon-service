@@ -35,7 +35,11 @@ public class SalonServiceImplementation implements SalonService {
     public Salon updateSalon(SalonDTO salon, UserDTO user, Long salonId) throws Exception {
         Salon existingSalon = salonRepository.findById(salonId).orElse(null);
 
-        if(existingSalon != null && salon.getOwnerId().equals(user.getId())){
+        if(!salon.getOwnerId().equals(user.getId())){
+            throw new Exception("You don't have permission to update this salon");
+        }
+
+        if(existingSalon != null){
             existingSalon.setName(salon.getName());
             existingSalon.setImages(salon.getImages());
             existingSalon.setAddress(salon.getAddress());
@@ -43,6 +47,8 @@ public class SalonServiceImplementation implements SalonService {
             existingSalon.setCity(salon.getCity());
             existingSalon.setOpenTime(salon.getOpenTime());
             existingSalon.setCloseTime(salon.getCloseTime());
+
+            return salonRepository.save(existingSalon);
         }
         throw new Exception("salon not exist");
     }
@@ -55,7 +61,7 @@ public class SalonServiceImplementation implements SalonService {
     @Override
     public Salon getSalonById(Long id) {
         Salon salon = salonRepository.findById(id).orElse(null);
-        if(salon != null){
+        if(salon == null){
             throw new RuntimeException("salon not exist");
         }
       return salon;
